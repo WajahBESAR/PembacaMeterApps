@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootBacameter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".BacaMeter">
+
+    <TextView
+        android:id="@+id/txtHubungiTelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/icon_addphone"
+        android:drawablePadding="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/tambah_no_telepon"
+        android:textColor="#0457DB"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterTelp" />
+
+    <ImageView
+        android:id="@+id/imgRumah"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="#05122C"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_rumah" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="#0457DB"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgRumah" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/imgRumah"
+        app:layout_constraintStart_toStartOf="@+id/imgRumah"
+        app:layout_constraintTop_toTopOf="@+id/imgRumah"
+        tools:ignore="UselessLeaf">
+
+        <ImageView
+            android:id="@+id/imgBacaMeterBack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:padding="10dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imgBacaMeterGantiPhotoRumah"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/icon_camera" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtBacaMeterNopel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="none"
+        android:text="@string/_00000000"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/nomor_pelanggan_"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterNopel"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterNopel"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterNopel" />
+
+    <EditText
+        android:id="@+id/edtBacaMeterNomet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="none"
+        android:text="@string/_00000000"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNopel"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/no_meter_"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterNomet"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterNomet"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNopel" />
+
+    <EditText
+        android:id="@+id/edtBacaMeterNama"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="none"
+        android:text="@string/nama_pelanggan"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterGoltar"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/nama"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterNama"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterNama"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterNama" />
+
+    <EditText
+        android:id="@+id/edtBacaMeterGoltar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="textPersonName"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="@string/golongan_tarif"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNomet"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/gol_tarif"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterGoltar"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterGoltar"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterGoltar" />
+
+    <EditText
+        android:id="@+id/edtBacaMeterTelp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="@string/telepon"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterAlamat"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/telepon"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterTelp" />
+
+    <EditText
+        android:id="@+id/edtBacaMeterAlamat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="top"
+        android:inputType="none"
+        android:text="@string/alamat"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNama"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/alamat"
+        android:textAlignment="textEnd"
+        android:textColor="#80000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterAlamat"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaMeterAlamat"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterAlamat" />
+
+<!--    <androidx.cardview.widget.CardView-->
+    <TextView
+        android:id="@+id/txtUpdateKoordinat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:drawableEnd="@drawable/icon_coordinate"
+        android:drawablePadding="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/update_koordinat"
+        android:textColor="#0457DB"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterTelp" />
+
+    <RelativeLayout
+        android:id="@+id/cardBacaMeterButton"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="#C4CACACA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingPrefix">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rootBacameterButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/btnBacaMeterBaca"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/lanjut_baca_meter"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imgBacaMeterTelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintEnd_toEndOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterTelp"
+        app:srcCompat="@drawable/icon_phone" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:contentDescription="@string/todo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

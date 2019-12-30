@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootBacaStand"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".BacaStand">
+
+    <ImageView
+        android:id="@+id/imgBacaStandMeter"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:background="#05122C"
+        android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/watermeter" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="1dp"
+        android:background="#0457DB"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBacaStandMeter" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgBacaStandMeter"
+        tools:ignore="UselessLeaf">
+
+        <ImageView
+            android:id="@+id/imgBacaStandBack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:padding="10dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imgBacaStandGantiPhotoMeter"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/icon_camera" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/cardBacaStandButton"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="#C4CACACA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rootBacastandButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/btnBacaStandSimpan"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/simpan_dan_upload"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edtBacaStandStand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/catatan"
+        android:textAlignment="textEnd"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaStandCatatan"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaStandCatatan"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaStandStand" />
+
+    <EditText
+        android:id="@+id/edtBacaStandCatatan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:lines="1"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:textColor="#032E74"
+        android:textIsSelectable="true"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaStandStand"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/stand"
+        android:textAlignment="textEnd"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaStandStand"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaStandStand"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaStandStand" />
+
+    <EditText
+        android:id="@+id/edtBacaStandKeterangan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/icon_customer_white_samll"
+        android:drawablePadding="80dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="top"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLength="250"
+        android:maxLines="1"
+        android:textColor="#032E74"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaStandCatatan"
+        tools:ignore="LabelFor,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/keterangan"
+        android:textAlignment="textEnd"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaStandKeterangan"
+        app:layout_constraintStart_toStartOf="@+id/edtBacaStandKeterangan"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaStandCatatan" />
+
+    <TextView
+        android:id="@+id/txtHistoryBacaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/icon_history"
+        android:drawablePadding="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/history_bacaan"
+        android:textColor="#0457DB"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaStandKeterangan" />
+
+    <ImageView
+        android:id="@+id/imgSelectCatatan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaStandCatatan"
+        app:layout_constraintEnd_toEndOf="@+id/edtBacaStandCatatan"
+        app:layout_constraintTop_toTopOf="@id/edtBacaStandCatatan"
+        app:srcCompat="@drawable/icon_hamburger" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:contentDescription="@string/todo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

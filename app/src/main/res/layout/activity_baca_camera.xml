@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BacaCamera">
+
+    <TextureView
+        android:id="@+id/texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--    <Button-->
+<!--        android:id="@+id/btn_takepicture"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:text="@string/capture"-->
+<!--        android:visibility="gone" />-->
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/cropImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false"
+        app:cropBackgroundColor="#00FFFFFF"
+        app:cropBorderCornerColor="#FF0000"
+        app:cropBorderLineColor="#00FF0202"
+        app:cropInitialCropWindowPaddingRatio="0">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/todo"
+            android:src="@android:drawable/alert_light_frame"
+            android:visibility="invisible" />
+
+    </com.theartofdev.edmodo.cropper.CropImageView>
+
+    <ImageView
+        android:id="@+id/imgReset"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/reset"
+        android:visibility="invisible"
+        android:contentDescription="@string/todo" />
+
+    <ImageView
+        android:id="@+id/imgSave"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/check"
+        android:visibility="invisible"
+        android:contentDescription="@string/todo" />
+
+    <ImageView
+        android:id="@+id/imgCapture"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_toStartOf="@+id/imgSave"
+        android:layout_toEndOf="@+id/imgReset"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/camera"
+        app:srcCompat="@drawable/camera"
+        tools:srcCompat="@drawable/camera" />
+
+    <FrameLayout
+        android:id="@+id/frameCrop"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="130dp"
+        android:alpha=".5"
+        android:background="@android:drawable/gallery_thumb"
+        android:visibility="invisible">
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imgFlash"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:alpha=".3"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/light"
+        app:srcCompat="@drawable/light"
+        tools:srcCompat="@drawable/light" />
+
+    <TextView
+        android:id="@+id/txtRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameCrop"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>
