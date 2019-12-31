@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#01277C</color>
     <color name="colorAccent">#7D23EE</color>
 
-    <color name="transparent_progress">#7A000000</color>
+    <color name="transparent_progress">#BE000000</color>
 </resources>

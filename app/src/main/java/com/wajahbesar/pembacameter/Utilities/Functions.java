@@ -30,7 +30,7 @@ public class Functions {
         snackbarText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         snackbarText.append(".");
 
-        Snackbar snackbar = Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).setDuration(msDuration).setBackgroundTint(Color.RED);
+        final Snackbar snackbar = Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).setDuration(msDuration).setBackgroundTint(Color.RED);
         snackbar.show();
     }
 

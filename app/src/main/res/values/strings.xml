@@ -46,7 +46,7 @@
     <string name="api_server">API Server:</string>
     <string name="http_server_port">http://server:port</string>
     <string name="simpan">Simpan</string>
-    <string name="masih_ada_data_yang_belum_diupload_silahkan_upload_dengan_menggunakan_menu_upload_atau_pilih_reset_untuk_mengganti_dengan_data_yang_baru">Masih ada data yang belum diupload. Silahkan upload dengan menggunakan menu Upload atau pilih Reset untuk mengganti dengan data yang baru.</string>
+    <string name="masih_ada_data_yang_belum_diupload_silahkan_upload_dengan_menggunakan_menu_upload_atau_pilih_reset_untuk_mengganti_dengan_data_yang_baru">Masih ada data yang belum selesai. Pastikan data telah terbaca, dan hasil bacaan telah ter-upload semua. Jika tetap ingin melakukan RESET data, silahkan gunakan tombol RESET\n</string>
     <string name="reset">Reset</string>
     <string name="ganti_foto_rumah">Ganti foto rumah</string>
     <string name="nomor_pelanggan_">No Pelanggan:</string>
@@ -70,5 +70,8 @@
     <string name="tambah_no_telepon">Tambah No. Telepon</string>
     <string name="ganti_photo_rumah">Ganti Photo Rumah?</string>
     <string name="ya_lanjutkan">Ya, Lanjutkan</string>
+    <string name="data_berhasil_disimpan_di_device_tetapi_proses_upload_ke_server_gagal_apakah_ingin_mencoba_upload_lagi_atau_nanti_saja_melalui_menu_upload_data">Data berhasil disimpan di device, tetapi proses UPLOAD ke server gagal. Apakah ingin mencoba upload lagi? Atau nanti saja melalui menu Upload Data?\n</string>
+    <string name="nanti_saja">Nanti Saja</string>
+    <string name="coba_lagi">Coba Lagi?</string>
 
 </resources>

@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
 
-                int terbaca = Integer.parseInt(txtDibaca.getText().toString());
-                if (terbaca > 0) {
+                int sisa = Integer.parseInt(txtSisa.getText().toString());
+                if (sisa > 0) {
                     // Create a AlertDialog Builder.
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                     // Set title, icon, can not cancel properties.
@@ -324,6 +324,8 @@ public class MainActivity extends AppCompatActivity {
         databaseHandler.emptyPelanggan();
         databaseHandler.emptyBacaan();
 
+        bacaDataBase();
+
         String api_token = ((GlobalVars) getApplication()).getApiToken();
         @SuppressLint("HardwareIds") final String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         String str_ini = txtIni.getText().toString();
@@ -371,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,6 +67,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -87,9 +91,12 @@ public class BacaStand extends AppCompatActivity {
     private String extStand = "";
     private Double vLat, vLng;
 
+    private String parent;
+
     EditText edtBacaStandStand;
     EditText edtBacaStandCatatan;
     EditText edtBacaStandKeterangan;
+    Button btnBacaStandSimpan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +209,7 @@ public class BacaStand extends AppCompatActivity {
 
                 Intent intent = new Intent(BacaStand.this, BacaCamera.class);
                 intent.putExtra("extNopel", extNopel);
+                intent.putExtra("parent", parent);
                 startActivity(intent);
 
                 finish();
@@ -234,6 +242,7 @@ public class BacaStand extends AppCompatActivity {
             extNopel = extras.getString("extNopel");
             extFilename = extras.getString("extFilename");
             extStand = extras.getString("extStand");
+            parent = extras.getString("parent");
         }
         if (extNopel != null && !extNopel.equals("")) {
             // panggil database
@@ -267,12 +276,13 @@ public class BacaStand extends AppCompatActivity {
             }
         });
 
-        Button btnBacaStandSimpan = findViewById(R.id.btnBacaStandSimpan);
+        btnBacaStandSimpan = findViewById(R.id.btnBacaStandSimpan);
         btnBacaStandSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
 
+                btnBacaStandSimpan.setEnabled(false);
                 if (edtBacaStandStand.getText().length() > 0) {
                     if (edtBacaStandCatatan.getText().toString().length() > 0) {
 
@@ -304,6 +314,9 @@ public class BacaStand extends AppCompatActivity {
                 init_petugas = tablePetugas.getInisial();
                 hari_baca = tablePetugas.getHaribaca();
             }
+
+            //Log.e("FULLDATE", datetime_full);
+
             String tahun, bulan, tanggal, jam, menit, detik;
             if (datetime_full.equals("")){
                 switch (Calendar.getInstance().get(Calendar.MONTH)){
@@ -360,7 +373,7 @@ public class BacaStand extends AppCompatActivity {
             databaseHandler.updatePelanggan("1", extNopel);
 
             // Upload ke server
-            uploadBacaan(init_petugas, hari_baca, bulan, tahun, bacaNopel, bacaStand, bacaCatat, bacaKeter, bacaTangg);
+            uploadBacaan(init_petugas, hari_baca, tahun, bulan, tanggal, bacaNopel, bacaStand, bacaCatat, bacaKeter, bacaTangg);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -368,7 +381,7 @@ public class BacaStand extends AppCompatActivity {
         }
     }
 
-    private void uploadBacaan(final String Initial, final String Haribaca, final String Bulan, final String Tahun, final String Nopel, final String Stand, final String Catatan, final String Keterangan, final String Tanggal) {
+    private void uploadBacaan(final String Initial, final String Haribaca, final String Tahun, final String Bulan, final String Tanggal, final String Nopel, final String Stand, final String Catatan, final String Keterangan, final String FullTanggal) {
         final String api_token = ((GlobalVars) getApplication()).getApiToken();
 
         progressDialog.show();
@@ -376,12 +389,80 @@ public class BacaStand extends AppCompatActivity {
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, ambilAPISetting(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
-                //outputResponse(response);
                 progressDialog.dismiss();
 
-                new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootBacaStand), "Upload berhasil!", "", Snackbar.LENGTH_SHORT);
+                //outputResponse(response);
+                byte[] bytes = response.data;
+                String str = new String(bytes, StandardCharsets.UTF_8);
 
-                //finish();
+                if (str.equals("ok")){
+                    // kasih popup kalo udah selesai, atau bikin delay lalu next action di Snackbar nya
+                    new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootBacaStand), "Data berhasil disimpan dan diupload ke server!", "", 3000);
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
+                                    Intent intent;
+                                    if (parent.equals("1")) {
+                                        intent = new Intent(BacaStand.this, ByNopel.class);
+                                    } else {
+                                        intent = new Intent(BacaStand.this, MainActivity.class);
+                                    }
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }, 3000);
+                } else {
+                    btnBacaStandSimpan.setEnabled(true);
+
+                    // Create a AlertDialog Builder.
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BacaStand.this);
+                    // Set title, icon, can not cancel properties.
+                    alertDialogBuilder.setTitle("Upload gagal!");
+                    alertDialogBuilder.setIcon(R.drawable.logopdam);
+                    alertDialogBuilder.setCancelable(true);
+
+                    // Set the inflated layout view object to the AlertDialog builder.
+                    LayoutInflater layoutInflater = LayoutInflater.from(BacaStand.this);
+                    @SuppressLint("InflateParams") View popup_view_reupload = layoutInflater.inflate(R.layout.popup_reupload, null);
+                    Button btnCobaLagi = popup_view_reupload.findViewById(R.id.btnCobaLagi);
+                    Button btnNantiSaja = popup_view_reupload.findViewById(R.id.btnNantiSaja);
+                    alertDialogBuilder.setView(popup_view_reupload);
+
+                    // Create AlertDialog and show.
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                    btnCobaLagi.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Functions(getApplicationContext()).Getar();
+                            btnBacaStandSimpan.setEnabled(false);
+
+                            uploadBacaan(Initial, Haribaca, Tahun, Bulan, Tanggal, Nopel, Stand, Catatan, Keterangan, FullTanggal);
+                        }
+                    });
+
+                    btnNantiSaja.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Functions(getApplicationContext()).Getar();
+
+                            Intent intent;
+                            if (parent.equals("1")) {
+                                intent = new Intent(BacaStand.this, ByNopel.class);
+                            } else {
+                                intent = new Intent(BacaStand.this, MainActivity.class);
+                            }
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -390,6 +471,7 @@ public class BacaStand extends AppCompatActivity {
                 error.printStackTrace();
 
                 progressDialog.dismiss();
+                btnBacaStandSimpan.setEnabled(true);
 
             }
         }){
@@ -400,13 +482,13 @@ public class BacaStand extends AppCompatActivity {
                 params.put("init", Initial);
                 params.put("readday", Haribaca);
                 params.put("custid", Nopel);
-                params.put("reqyear", Tahun);
-                params.put("reqmonth", Bulan);
-                params.put("reqdate", Bulan);
+                params.put("year", Tahun);
+                params.put("month", Bulan);
+                params.put("date", Tanggal);
                 params.put("stand", Stand);
                 params.put("notes", Catatan);
                 params.put("desc", Keterangan);
-                params.put("fulldate", Tanggal);
+                params.put("fulldate", FullTanggal);
                 params.put("token", api_token);
                 System.out.println(Collections.singletonList(params));
                 return params;

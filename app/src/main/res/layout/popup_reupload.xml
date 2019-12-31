@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2196F3"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/data_berhasil_disimpan_di_device_tetapi_proses_upload_ke_server_gagal_apakah_ingin_mencoba_upload_lagi_atau_nanti_saja_melalui_menu_upload_data"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <Button
+                android:id="@+id/btnNantiSaja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#036EBE"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="start|center_horizontal"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/nanti_saja"
+                android:textAllCaps="false"
+                android:textSize="25sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnCobaLagi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="#036EBE"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal|end"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/coba_lagi"
+                android:textAllCaps="false"
+                android:textSize="25sp"
+                tools:ignore="ButtonStyle" />
+        </TableRow>
+
+    </TableRow>
+
+</TableLayout>

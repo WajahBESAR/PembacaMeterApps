@@ -46,6 +46,7 @@ public class BacaMeter extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private Animator currentAnimator;
     private int shortAnimationDuration;
+    private String parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,7 @@ public class BacaMeter extends AppCompatActivity {
             edtGoltar.setText(extras.getString("extGoltar"));
             edtTelp.setText(extras.getString("extTelp"));
             edtNomet.setText(extras.getString("extMetnum"));
+            parent = extras.getString("parent");
 
             getHousePic();
         }
@@ -149,6 +151,7 @@ public class BacaMeter extends AppCompatActivity {
 
                 Intent intent = new Intent(BacaMeter.this, BacaCamera.class);
                 intent.putExtra("extNopel", curNopel);
+                intent.putExtra("parent", parent);
 
                 startActivity(intent);
             }

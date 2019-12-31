@@ -115,7 +115,11 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
     private String extNopel;
     private String dbsInitial;
     private Double vLat, vLng;
+    private String nama = "";
+    private String ava = "";
     private String hari = "";
+
+    private String parent;
 
     private ProgressDialog progressDialog;
 
@@ -144,6 +148,7 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
 
         // GET NOPEL
         extNopel = getIntent().getStringExtra("extNopel");
+        parent = getIntent().getStringExtra("parent");
 
         // Cek, udah dibaca atau belum
         // ..
@@ -185,6 +190,9 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
         final List<TablePetugas> tablePetugasList = databaseHandler.selectPetugas();
         for(TablePetugas tablePetugas: tablePetugasList) {
             dbsInitial = tablePetugas.getInisial();
+            hari = tablePetugas.getHaribaca();
+            nama = tablePetugas.getNama();
+            ava = tablePetugas.getAvatar();
         }
 
         // GET CURRENT LOCATION
@@ -223,17 +231,12 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(String response) {
-                        String nama = "";
-                        String ava = "";
                         String tanggalServer = "";
                         if(response.length() > 20) {
                             tanggalServer = response;
                         } else {
                             List<TablePetugas> tablePetugasList = databaseHandler.selectPetugas();
                             for (TablePetugas tablePetugas : tablePetugasList) {
-                                nama = tablePetugas.getNama();
-                                hari = tablePetugas.getHaribaca();
-                                ava = tablePetugas.getAvatar();
                                 tanggalServer = tablePetugas.getTanggal();
                             }
                         }
@@ -432,6 +435,7 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
                             extras.putString("extNopel", extNopel);
                             extras.putString("extFilename", imageFileName);
                             extras.putString("extStand", txtRead.getText().toString());
+                            extras.putString("parent", parent);
 
                             Intent intent = new Intent(BacaCamera.this, BacaStand.class);
                             intent.putExtras(extras);

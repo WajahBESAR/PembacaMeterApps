@@ -240,6 +240,7 @@ public class ByNopel extends AppCompatActivity {
             extras.putString("extMetnum", tempMetnum);
             extras.putString("extLat", tempLat);
             extras.putString("extLon", tempLon);
+            extras.putString("parent", "1");
 
             Intent intent = new Intent(this, BacaMeter.class);
             intent.putExtras(extras);
