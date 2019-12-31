@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -69,6 +69,14 @@ public class ByNopel extends AppCompatActivity {
         progressDialog.setMessage("Mohon bersabar, ini ujian...");
         progressDialog.setContentView(new ProgressBar(this));
 
+        ImageView btnByNopelBack = findViewById(R.id.btnByNopelBack);
+        btnByNopelBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Functions(getApplicationContext()).Getar();
+                finish();
+            }
+        });
         keyButton0.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override

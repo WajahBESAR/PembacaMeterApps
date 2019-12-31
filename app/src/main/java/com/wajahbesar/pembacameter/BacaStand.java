@@ -299,6 +299,7 @@ public class BacaStand extends AppCompatActivity {
                 } else {
                     new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootBacaStand), "Data belum lengkap!", "", Snackbar.LENGTH_SHORT);
                 }
+                btnBacaStandSimpan.setEnabled(true);
             }
         });
     }
@@ -414,14 +415,12 @@ public class BacaStand extends AppCompatActivity {
                                 }
                             }, 3000);
                 } else {
-                    btnBacaStandSimpan.setEnabled(true);
-
                     // Create a AlertDialog Builder.
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BacaStand.this);
                     // Set title, icon, can not cancel properties.
                     alertDialogBuilder.setTitle("Upload gagal!");
                     alertDialogBuilder.setIcon(R.drawable.logopdam);
-                    alertDialogBuilder.setCancelable(true);
+                    alertDialogBuilder.setCancelable(false);
 
                     // Set the inflated layout view object to the AlertDialog builder.
                     LayoutInflater layoutInflater = LayoutInflater.from(BacaStand.this);
@@ -438,7 +437,7 @@ public class BacaStand extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             new Functions(getApplicationContext()).Getar();
-                            btnBacaStandSimpan.setEnabled(false);
+                            alertDialog.dismiss();
 
                             uploadBacaan(Initial, Haribaca, Tahun, Bulan, Tanggal, Nopel, Stand, Catatan, Keterangan, FullTanggal);
                         }
@@ -448,6 +447,7 @@ public class BacaStand extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             new Functions(getApplicationContext()).Getar();
+                            alertDialog.dismiss();
 
                             Intent intent;
                             if (parent.equals("1")) {
@@ -478,7 +478,7 @@ public class BacaStand extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "upload");
+                params.put("action", "uploadx");
                 params.put("init", Initial);
                 params.put("readday", Haribaca);
                 params.put("custid", Nopel);
