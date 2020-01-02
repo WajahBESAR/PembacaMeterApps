@@ -1,8 +1,5 @@
 package com.wajahbesar.pembacameter.Database;
 
-import java.util.Calendar;
-import java.util.Objects;
-
 public class TableBacaan {
     private String Nopel;
     private String Stand;
@@ -20,7 +17,7 @@ public class TableBacaan {
         this.Tanggal = Tanggal;
     }
 
-    public String getNopel() {
+    String getNopel() {
         return Nopel;
     }
 
@@ -28,7 +25,7 @@ public class TableBacaan {
         this.Nopel = Nopel;
     }
 
-    public String getStand() {
+    String getStand() {
         return Stand;
     }
 
@@ -36,7 +33,7 @@ public class TableBacaan {
         this.Stand = Stand;
     }
 
-    public String getCatatan() {
+    String getCatatan() {
         return Catatan;
     }
 
@@ -44,7 +41,7 @@ public class TableBacaan {
         this.Catatan = Catatan;
     }
 
-    public String getKeterangan() {
+    String getKeterangan() {
         return Keterangan;
     }
 
@@ -52,7 +49,7 @@ public class TableBacaan {
         this.Keterangan = Keterangan;
     }
 
-    public String getTanggal() {
+    String getTanggal() {
         return Tanggal;
     }
 

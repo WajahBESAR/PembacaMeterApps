@@ -405,6 +405,8 @@ public class BacaStand extends AppCompatActivity {
                                     Intent intent;
                                     if (parent.equals("1")) {
                                         intent = new Intent(BacaStand.this, ByNopel.class);
+                                    } else if(parent.equals("2")) {
+                                        intent = new Intent(BacaStand.this, ByList.class);
                                     } else {
                                         intent = new Intent(BacaStand.this, MainActivity.class);
                                     }
@@ -452,6 +454,8 @@ public class BacaStand extends AppCompatActivity {
                             Intent intent;
                             if (parent.equals("1")) {
                                 intent = new Intent(BacaStand.this, ByNopel.class);
+                            } else if(parent.equals("2")) {
+                                intent = new Intent(BacaStand.this, ByList.class);
                             } else {
                                 intent = new Intent(BacaStand.this, MainActivity.class);
                             }
@@ -478,7 +482,7 @@ public class BacaStand extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "uploadx");
+                params.put("action", "upload");
                 params.put("init", Initial);
                 params.put("readday", Haribaca);
                 params.put("custid", Nopel);

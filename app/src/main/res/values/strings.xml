@@ -73,5 +73,6 @@
     <string name="data_berhasil_disimpan_di_device_tetapi_proses_upload_ke_server_gagal_apakah_ingin_mencoba_upload_lagi_atau_nanti_saja_melalui_menu_upload_data">Data berhasil disimpan di device, tetapi proses UPLOAD ke server gagal. Apakah ingin mencoba upload lagi? Atau nanti saja melalui menu Upload Data?\n</string>
     <string name="nanti_saja">Nanti Saja</string>
     <string name="coba_lagi">Coba Lagi?</string>
-
+    <string name="cari_hint">Cari Nomor pelanggan / Nama / Alamat</string>
+    <string name="title_activity_by_maps">Search By Maps</string>
 </resources>

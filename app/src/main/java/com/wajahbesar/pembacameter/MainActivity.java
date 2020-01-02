@@ -164,8 +164,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
-                new Functions(getApplicationContext()).showMessage(view, "Anda memilih menu ", "List Pelanggan", 5000);
-                // ...
+                startActivity(new Intent(MainActivity.this, ByList.class));
             }
         });
 
@@ -174,8 +173,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
-                new Functions(getApplicationContext()).showMessage(view, "Anda memilih menu ", "Peta Pelanggan", 5000);
-                // ...
+                startActivity(new Intent(MainActivity.this, ByMaps.class));
             }
         });
 
