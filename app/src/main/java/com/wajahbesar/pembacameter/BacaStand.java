@@ -403,12 +403,19 @@ public class BacaStand extends AppCompatActivity {
                             new Runnable() {
                                 public void run() {
                                     Intent intent;
-                                    if (parent.equals("1")) {
-                                        intent = new Intent(BacaStand.this, ByNopel.class);
-                                    } else if(parent.equals("2")) {
-                                        intent = new Intent(BacaStand.this, ByList.class);
-                                    } else {
-                                        intent = new Intent(BacaStand.this, MainActivity.class);
+                                    switch (parent) {
+                                        case "1":
+                                            intent = new Intent(BacaStand.this, ByNopel.class);
+                                            break;
+                                        case "2":
+                                            intent = new Intent(BacaStand.this, ByList.class);
+                                            break;
+                                        case "3":
+                                            intent = new Intent(BacaStand.this, ByMaps.class);
+                                            break;
+                                        default:
+                                            intent = new Intent(BacaStand.this, MainActivity.class);
+                                            break;
                                     }
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -452,12 +459,19 @@ public class BacaStand extends AppCompatActivity {
                             alertDialog.dismiss();
 
                             Intent intent;
-                            if (parent.equals("1")) {
-                                intent = new Intent(BacaStand.this, ByNopel.class);
-                            } else if(parent.equals("2")) {
-                                intent = new Intent(BacaStand.this, ByList.class);
-                            } else {
-                                intent = new Intent(BacaStand.this, MainActivity.class);
+                            switch (parent) {
+                                case "1":
+                                    intent = new Intent(BacaStand.this, ByNopel.class);
+                                    break;
+                                case "2":
+                                    intent = new Intent(BacaStand.this, ByList.class);
+                                    break;
+                                case "3":
+                                    intent = new Intent(BacaStand.this, ByMaps.class);
+                                    break;
+                                default:
+                                    intent = new Intent(BacaStand.this, MainActivity.class);
+                                    break;
                             }
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setContentView(new ProgressBar(this));
 
         // SEMUA PERmission DIMINTA DISINI, setelah itu -> starttheactivity
-        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA};
-        String rationale = "Ijinkan untuk menyimpan data ke memory, Ijinkan untuk mengetahui lokasi Anda, Ijinkan menggunakan Kamera?";
+        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
+        String rationale = "Ijinkan untuk menyimpan data ke memory, Ijinkan untuk mengetahui lokasi Anda, Ijinkan menggunakan Kamera, Ijinkan mengakses Internet?";
         Permissions.Options options = new Permissions.Options().setRationaleDialogTitle("Penting").setSettingsDialogTitle("Info");
 
         Permissions.check(this, permissions, rationale, options, new PermissionHandler() {
@@ -257,6 +257,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        bacaDataBase();
+    }
+
     @SuppressLint("SetTextI18n")
     private void StartTheActivity() {
         // GET CURRENT LOCATION
@@ -301,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void bacaDataBase() {
+    public void bacaDataBase() {
         // jumlah all pelanggan
         int pelJumlah = databaseHandler.countPelanggan("0");
         txtJumlah.setText(String.valueOf(pelJumlah));

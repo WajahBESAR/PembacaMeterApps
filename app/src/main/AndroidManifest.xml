@@ -28,7 +28,9 @@
         android:roundIcon="@drawable/logopdam"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:targetApi="m">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -44,7 +46,7 @@
 
         <activity
             android:name=".ByMaps"
-            android:label="@string/title_activity_by_maps"></activity>
+            android:label="@string/title_activity_by_maps" />
         <activity android:name=".ByList" />
         <activity
             android:name=".BacaStand"

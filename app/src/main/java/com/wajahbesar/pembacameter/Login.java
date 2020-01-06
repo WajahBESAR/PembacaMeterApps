@@ -280,6 +280,7 @@ public class Login extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 txtConnected.setText("< Disconnected >");
+                Log.e("CONNECT", Objects.requireNonNull(error.getMessage()));
             }
         });
 
