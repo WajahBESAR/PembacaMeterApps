@@ -8,21 +8,6 @@
     android:background="#FFFFFF"
     tools:context=".BacaMeter">
 
-    <TextView
-        android:id="@+id/txtHubungiTelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/icon_addphone"
-        android:drawablePadding="5dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/tambah_no_telepon"
-        android:textColor="#0457DB"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterTelp" />
-
     <ImageView
         android:id="@+id/imgRumah"
         android:layout_width="0dp"
@@ -110,6 +95,21 @@
         tools:ignore="LabelFor,UnusedAttribute" />
 
     <TextView
+        android:id="@+id/txtHubungiTelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/icon_addphone"
+        android:drawablePadding="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/tambah_no_telepon"
+        android:textColor="#0457DB"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterTelp" />
+
+    <TextView
         android:id="@+id/textView30"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -140,7 +140,6 @@
         android:textColor="#032E74"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNopel"
         tools:ignore="LabelFor,UnusedAttribute" />
@@ -176,7 +175,6 @@
         android:textColor="#032E74"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterGoltar"
         tools:ignore="LabelFor,UnusedAttribute" />
@@ -213,7 +211,6 @@
         android:textColor="#032E74"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNomet"
         tools:ignore="LabelFor,UnusedAttribute" />
@@ -283,6 +280,7 @@
         android:fontFamily="sans-serif-condensed"
         android:gravity="top"
         android:inputType="none"
+        android:maxLines="2"
         android:text="@string/alamat"
         android:textColor="#032E74"
         android:textSize="24sp"
@@ -312,7 +310,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="20dp"
         android:drawableEnd="@drawable/icon_coordinate"
         android:drawablePadding="5dp"
         android:fontFamily="sans-serif-condensed"
@@ -321,6 +319,17 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterTelp" />
+
+    <ImageView
+        android:id="@+id/imgBacaMeterTelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintEnd_toEndOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterTelp"
+        app:srcCompat="@drawable/icon_phone" />
 
     <RelativeLayout
         android:id="@+id/cardBacaMeterButton"
@@ -349,18 +358,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imgBacaMeterTelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="@+id/edtBacaMeterTelp"
-        app:layout_constraintEnd_toEndOf="@+id/edtBacaMeterTelp"
-        app:layout_constraintTop_toTopOf="@+id/edtBacaMeterTelp"
-        app:srcCompat="@drawable/icon_phone" />
 
     <ImageView
         android:id="@+id/expanded_image"
@@ -373,5 +373,131 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgAlamatDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:alpha=".5"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toTopOf="@+id/edtBacaMeterTelp"
+        app:layout_constraintEnd_toEndOf="@+id/edtBacaMeterAlamat"
+        app:layout_constraintTop_toBottomOf="@+id/edtBacaMeterNama"
+        app:srcCompat="@drawable/icon_hamburger" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bacameterCarMap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/cardBacaMeterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgRumah">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bacameterConstrainMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/bacametermapView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/bacameterLayoutMap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/todo"
+                android:paddingBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bacametermapView"
+                app:layout_constraintEnd_toEndOf="@+id/bacametermapView"
+                app:layout_constraintStart_toStartOf="@+id/bacametermapView"
+                app:layout_constraintTop_toTopOf="@+id/bacametermapView"
+                app:srcCompat="@drawable/marker_32" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bacameterLayoutMap"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/latitude"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btnUpdateLatLng" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/longitude"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+                <TextView
+                    android:id="@+id/txtNewLat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnUpdateLatLng"
+                    app:layout_constraintStart_toStartOf="@+id/textView38"
+                    app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+                <TextView
+                    android:id="@+id/txtNewLng"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnUpdateLatLng"
+                    app:layout_constraintStart_toStartOf="@+id/textView39"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNewLat" />
+
+                <Button
+                    android:id="@+id/btnUpdateLatLng"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="#2196F3"
+                    android:fontFamily="sans-serif-condensed"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="@android:string/ok"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

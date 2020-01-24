@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
@@ -69,6 +70,8 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.snackbar.Snackbar;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.wajahbesar.pembacameter.Database.DatabaseHandler;
+import com.wajahbesar.pembacameter.Database.TableBacaan;
+import com.wajahbesar.pembacameter.Database.TablePelanggan;
 import com.wajahbesar.pembacameter.Database.TablePetugas;
 import com.wajahbesar.pembacameter.Database.TableSetting;
 import com.wajahbesar.pembacameter.Utilities.Functions;
@@ -151,7 +154,7 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
         parent = getIntent().getStringExtra("parent");
 
         // Cek, udah dibaca atau belum
-        // ..
+        sudahDibaca(extNopel);
 
         texture = findViewById(R.id.texture);
         texture.setSurfaceTextureListener(textureListener);
@@ -478,6 +481,58 @@ public class BacaCamera extends AppCompatActivity implements OnTouchListener {
                 }
             }
         });
+    }
+
+    private void sudahDibaca(String nopel) {
+        String strFilename;
+        String strDibaca = "0";
+        String strStand = "";
+        List<TablePelanggan> tablePelangganList = databaseHandler.searchPelanggan("nopel", nopel);
+        if(tablePelangganList.size() > 0) {
+            Log.e("JUMLAH", String.valueOf(tablePelangganList.size()));
+            for (TablePelanggan tablePelanggan : tablePelangganList) {
+                strDibaca = tablePelanggan.getDibaca();
+            }
+
+            if (!strDibaca.equals("0")) {
+
+                // cari filename photo
+                List<TablePetugas> tablePetugasList = databaseHandler.selectPetugas();
+                String datetime_full = "";
+                for(TablePetugas tablePetugas: tablePetugasList) {
+                    datetime_full = tablePetugas.getTanggal(); // 2019-09-24 xxxxxx
+                }
+                String bln, thn;
+                if (datetime_full.length() > 10) {
+                    bln = datetime_full.substring(5, 7);
+                    thn = datetime_full.substring(0, 4);
+                } else {
+                    bln = String.valueOf(Calendar.getInstance().get(Calendar.MONTH));
+                    thn = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+                }
+                strFilename = nopel.substring(0, 4) + "-" + nopel.substring(4, 8) + "_" + bln + "_" + thn + ".JPG"; // DEFAULT FILE NAME PHOTO METER
+
+                // Cari stand sebelumnya
+                List<TableBacaan> tableBacaanList = databaseHandler.searchBacaan(nopel);
+                if (tableBacaanList.size() > 0) {
+                    for (TableBacaan tableBacaan : tableBacaanList) {
+                        strStand = tableBacaan.getStand();
+                    }
+                }
+
+                Bundle extras = new Bundle();
+                extras.putString("extNopel", nopel);
+                extras.putString("extFilename", strFilename);
+                extras.putString("extStand", strStand);
+                extras.putString("parent", parent);
+
+                Intent intent = new Intent(BacaCamera.this, BacaStand.class);
+                intent.putExtras(extras);
+
+                startActivity(intent);
+                finish();
+            }
+        }
     }
 
     private void openCamera() {

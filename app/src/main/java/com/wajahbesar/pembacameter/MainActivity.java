@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private DatabaseHandler databaseHandler;
     private Double vLat, vLng;
-    private TextView txtTanggal, txtNama, txtIni, txtHari, txtJumlah, txtDibaca, txtSisa;
+    private TextView txtTanggal, txtNama, txtIni, txtHari, txtJumlah, txtDibaca, txtUpload, txtSisa;
     private ImageView imgBackground;
 
     @Override
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         txtJumlah = findViewById(R.id.txtJumlah);
         txtDibaca = findViewById(R.id.txtDibaca);
         txtSisa = findViewById(R.id.txtSisa);
+        txtUpload = findViewById(R.id.txtUpload);
         imgBackground = findViewById(R.id.imgBackground);
 
         // Deklarasi progressdialog
@@ -106,47 +108,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDenied(Context context, ArrayList<String> deniedPermissions) {
                 finish();
-            }
-        });
-
-        // TOMBOL SYNC
-        findViewById(R.id.imgSync).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Functions(getApplicationContext()).Getar();
-
-                int sisa = Integer.parseInt(txtSisa.getText().toString());
-                if (sisa > 0) {
-                    // Create a AlertDialog Builder.
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                    // Set title, icon, can not cancel properties.
-                    alertDialogBuilder.setTitle("Reset data");
-                    alertDialogBuilder.setIcon(R.drawable.logopdam);
-                    alertDialogBuilder.setCancelable(true);
-
-                    // Set the inflated layout view object to the AlertDialog builder.
-                    LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
-                    @SuppressLint("InflateParams") View popup_sync_view = layoutInflater.inflate(R.layout.popup_sync, null);
-                    Button btnReset = popup_sync_view.findViewById(R.id.btnReset);
-                    alertDialogBuilder.setView(popup_sync_view);
-
-                    // Create AlertDialog and show.
-                    final AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
-
-                    btnReset.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new Functions(getApplicationContext()).Getar();
-
-                            alertDialog.dismiss();
-
-                            downloadData();
-                        }
-                    });
-                } else {
-                    downloadData();
-                }
             }
         });
 
@@ -182,8 +143,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
-                new Functions(getApplicationContext()).showMessage(view, "Anda memilih menu ", "Upload Pelanggan", 5000);
-                // ...
+                startActivity(new Intent(MainActivity.this, Upload.class));
             }
         });
 
@@ -204,11 +164,54 @@ public class MainActivity extends AppCompatActivity {
                 LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
                 @SuppressLint("InflateParams") View popup_setting_view = layoutInflater.inflate(R.layout.popup_logout, null);
                 Button btnLogout = popup_setting_view.findViewById(R.id.btnLogout);
+                Button btnResetData = popup_setting_view.findViewById(R.id.btnResetData);
                 alertDialogBuilder.setView(popup_setting_view);
 
                 // Create AlertDialog and show.
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+
+                btnResetData.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Functions(getApplicationContext()).Getar();
+
+                        int sisa = Integer.parseInt(txtSisa.getText().toString());
+                        if (sisa > 0) {
+                            // Create a AlertDialog Builder.
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                            // Set title, icon, can not cancel properties.
+                            alertDialogBuilder.setTitle("Reset data");
+                            alertDialogBuilder.setIcon(R.drawable.logopdam);
+                            alertDialogBuilder.setCancelable(true);
+
+                            // Set the inflated layout view object to the AlertDialog builder.
+                            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+                            @SuppressLint("InflateParams") View popup_sync_view = layoutInflater.inflate(R.layout.popup_sync, null);
+                            Button btnReset = popup_sync_view.findViewById(R.id.btnReset);
+                            alertDialogBuilder.setView(popup_sync_view);
+
+                            // Create AlertDialog and show.
+                            final AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+
+                            btnReset.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    new Functions(getApplicationContext()).Getar();
+
+                                    alertDialog.dismiss();
+
+                                    downloadData();
+                                }
+                            });
+                        } else {
+                            downloadData();
+                        }
+
+                        alertDialog.dismiss();
+                    }
+                });
 
                 btnLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -310,10 +313,12 @@ public class MainActivity extends AppCompatActivity {
     public void bacaDataBase() {
         // jumlah all pelanggan
         int pelJumlah = databaseHandler.countPelanggan("0");
-        txtJumlah.setText(String.valueOf(pelJumlah));
         int pelDibaca = databaseHandler.countPelanggan("1");
-        txtDibaca.setText(String.valueOf(pelDibaca));
-        txtSisa.setText(String.valueOf(pelJumlah - pelDibaca));
+        int pelUpload = databaseHandler.countPelanggan("2");
+        txtJumlah.setText(String.valueOf(pelJumlah));
+        txtDibaca.setText(String.valueOf(pelDibaca + pelUpload));
+        txtUpload.setText(String.valueOf(pelUpload));
+        txtSisa.setText(String.valueOf(pelJumlah - pelUpload));
     }
 
     private void downloadData() {
@@ -327,6 +332,18 @@ public class MainActivity extends AppCompatActivity {
         // kosongkan isi 2 tables ini
         databaseHandler.emptyPelanggan();
         databaseHandler.emptyBacaan();
+        // kosongkan file photo
+        File direktori = new File(Environment.getExternalStorageDirectory().getPath() + "/PembacaMeter/Photo/");
+        if (direktori.isDirectory()) {
+            String[] files = direktori.list();
+            if (files != null) {
+                for (String file : files) {
+                    if (new File(direktori, file).delete()) {
+                        Log.i("DeletePhoto", "deleted");
+                    }
+                }
+            }
+        }
 
         bacaDataBase();
 

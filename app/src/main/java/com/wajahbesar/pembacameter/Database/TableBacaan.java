@@ -17,7 +17,7 @@ public class TableBacaan {
         this.Tanggal = Tanggal;
     }
 
-    String getNopel() {
+    public String getNopel() {
         return Nopel;
     }
 
@@ -25,7 +25,7 @@ public class TableBacaan {
         this.Nopel = Nopel;
     }
 
-    String getStand() {
+    public String getStand() {
         return Stand;
     }
 
@@ -33,7 +33,7 @@ public class TableBacaan {
         this.Stand = Stand;
     }
 
-    String getCatatan() {
+    public String getCatatan() {
         return Catatan;
     }
 
@@ -41,7 +41,7 @@ public class TableBacaan {
         this.Catatan = Catatan;
     }
 
-    String getKeterangan() {
+    public String getKeterangan() {
         return Keterangan;
     }
 
@@ -49,7 +49,7 @@ public class TableBacaan {
         this.Keterangan = Keterangan;
     }
 
-    String getTanggal() {
+    public String getTanggal() {
         return Tanggal;
     }
 

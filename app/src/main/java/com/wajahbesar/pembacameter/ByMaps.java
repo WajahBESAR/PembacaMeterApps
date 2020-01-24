@@ -1,7 +1,5 @@
 package com.wajahbesar.pembacameter;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,14 +7,14 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,6 +32,7 @@ import com.wajahbesar.pembacameter.Database.DatabaseHandler;
 import com.wajahbesar.pembacameter.Database.TablePelanggan;
 import com.wajahbesar.pembacameter.Utilities.Functions;
 
+import java.security.cert.CertificateEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,10 +94,7 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
                 }
             }
         });
-    }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
         // GET CURRENT LOCATION
         FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocation.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -114,10 +110,30 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
             }
         });
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Set default place, sebelum get current location
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-6.620237, 106.815656), 15));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-6.620237, 106.815656), 15));
+
+        // GET CURRENT LOCATION
+//        FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
+//        mFusedLocation.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+//            @Override
+//            public void onSuccess(Location location) {
+//                if (location != null){
+//                    currentLocation = location;
+//                    // Add a marker in Tirta Pakuan
+//                    LatLng lokasiAwal = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+//                    mMap.addMarker(new MarkerOptions().position(lokasiAwal).title("Anda").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_people)));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lokasiAwal, 15));
+//                }
+//            }
+//        });
 
         // POPULATE DATA PELANGGAN WITH COORDINATES
         ArrayList<TablePelanggan> tablePelangganArrayList = (ArrayList<TablePelanggan>) databaseHandler.selectPelanggan();
@@ -130,9 +146,9 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
                 String dibaca = tablePelangganArrayList.get(i).getDibaca();
                 BitmapDescriptor bitmapDescriptor;
                 if (dibaca.equals("0")) {
-                    bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.marker_house_green);
+                    bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.marker_red);
                 } else {
-                    bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.marker_house_blue);
+                    bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.marker_green);
                 }
                 mMap.addMarker(new MarkerOptions()
                         .position(posision)
@@ -171,6 +187,14 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
                 snippet.setTextColor(Color.BLACK);
                 snippet.setText(marker.getSnippet());
 
+                Location pelangganLocation = new Location("pelanggan");
+                pelangganLocation.setLatitude(marker.getPosition().latitude);
+                pelangganLocation.setLongitude(marker.getPosition().longitude);
+                TextView jarak = new TextView(ByMaps.this);
+                jarak.setGravity(Gravity.CENTER);
+                jarak.setTextColor(Color.RED);
+                jarak.setText(getJarak(currentLocation, pelangganLocation));
+
                 TextView link = new TextView(ByMaps.this);
                 link.setGravity(Gravity.CENTER);
                 link.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
@@ -180,6 +204,7 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
 
                 info.addView(title);
                 info.addView(snippet);
+                info.addView(jarak);
                 info.addView(link);
 
                 return info;
@@ -240,6 +265,14 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
         });
     }
 
+    public String getJarak(Location awal, Location akhir) {
+        if ((awal != null) && (akhir != null)) {
+            return "Perkiraan jarak: " + awal.distanceTo(akhir) + " meter";
+        } else {
+            return "Perkiraan jarak: Tidak diketahui";
+        }
+    }
+
     @Override
     public void onLocationChanged(Location location){
         if (location != null){
@@ -254,11 +287,13 @@ public class ByMaps extends FragmentActivity implements OnMapReadyCallback, Loca
     @Override
     public void onProviderDisabled(String arg0){
         // Do something here if you would like to know when the provider is disabled by the user
+        new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootByMaps), "GPS mati!", "", 3000);
     }
 
     @Override
     public void onProviderEnabled(String arg0){
         // Do something here if you would like to know when the provider is enabled by the user
+        new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootByMaps), "GPS hidup!", "", 3000);
     }
 
     @Override

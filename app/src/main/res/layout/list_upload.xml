@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#97D0FC"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlUpload"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="16dp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:scaleType="fitXY"
+            app:srcCompat="@android:drawable/ic_menu_report_image"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/txtNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imgPhoto"
+            android:fontFamily="sans-serif-condensed"
+            android:text="JOKO HARDIANTO"
+            android:textColor="#494949"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txtAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNama"
+            android:layout_alignStart="@+id/txtNama"
+            android:layout_alignBottom="@+id/imgPhoto"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="top"
+            android:maxLines="1"
+            android:text="Alamatnya tertulis disini"
+            android:textColor="#494949"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,SmallSp" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtNama"
+            android:layout_alignStart="@+id/txtNama"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif-condensed"
+            android:text="12345678 / 1255487225"
+            android:textColor="#0A59B9"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/relSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="#B482A4FD"
+        android:orientation="vertical" />
+
+</LinearLayout>

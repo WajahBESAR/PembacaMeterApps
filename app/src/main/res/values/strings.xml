@@ -9,19 +9,20 @@
     <string name="jumlah">Jumlah</string>
     <string name="_276">276</string>
     <string name="dibaca">Dibaca</string>
+    <string name="upload">Upload</string>
     <string name="_149">149</string>
     <string name="sisa">Sisa</string>
     <string name="_43">43</string>
     <string name="aplikasi">APLIKASI</string>
     <string name="pembaca_meter">PEMBACA METER</string>
     <string name="ujang_ismat">UJANG ISMAT</string>
-    <string name="nomor_pelanggan">Nomor Pelanggan</string>
+    <string name="nomor_pelanggan">Input Nomor Pelanggan</string>
     <string name="masukkan_nomor_pelanggan_atau_nomor_meter">Masukkan nomor pelanggan atau nomor meter</string>
-    <string name="list_pelanggan">List Pelanggan</string>
+    <string name="list_pelanggan">Daftar Pelanggan</string>
     <string name="buka_data_pelanggan_dari_list_order_hari_ini">Buka data pelanggan dari list order hari ini</string>
-    <string name="peta_pelanggan">Peta Pelanggan</string>
+    <string name="peta_pelanggan">Peta Lokasi Pelanggan</string>
     <string name="buka_data_pelanggan_menggunakan_peta">Buka data pelanggan menggunakan peta</string>
-    <string name="upload_pelanggan">Upload Pelanggan</string>
+    <string name="upload_pelanggan">Upload Hasil Pembacaan</string>
     <string name="upload_data_hasil_pembacaan_ke_server">Upload data hasil pembacaan ke server</string>
     <string name="_15801499">15801499</string>
     <string name="_1">1</string>
@@ -75,4 +76,11 @@
     <string name="coba_lagi">Coba Lagi?</string>
     <string name="cari_hint">Cari Nomor pelanggan / Nama / Alamat</string>
     <string name="title_activity_by_maps">Search By Maps</string>
+    <string name="reset_data">Reset Data?</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+    <string name="upload_semua">Upload Semua</string>
+    <string name="jumlah_data_0">Jumlah data: 0</string>
+    <string name="upload_data_update">Upload Data Update</string>
+    <string name="upload_data_hasil_update_lapangan">Upload data hasil update lapangan</string>
 </resources>

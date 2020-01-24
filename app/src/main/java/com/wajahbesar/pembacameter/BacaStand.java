@@ -53,7 +53,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.wajahbesar.pembacameter.Database.DatabaseHandler;
 import com.wajahbesar.pembacameter.Database.TableBacaan;
 import com.wajahbesar.pembacameter.Database.TableCatatan;
-import com.wajahbesar.pembacameter.Database.TablePelanggan;
 import com.wajahbesar.pembacameter.Database.TablePetugas;
 import com.wajahbesar.pembacameter.Database.TableSetting;
 import com.wajahbesar.pembacameter.Utilities.Functions;
@@ -67,9 +66,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -248,6 +245,19 @@ public class BacaStand extends AppCompatActivity {
             // panggil database
             databaseHandler = new DatabaseHandler(this);
 
+            // Cari catatan sebelumnya <kalo udah dibaca>
+            String strCatatan = "";
+            String strKeterangan = "";
+            List<TableBacaan> tableBacaanList = databaseHandler.searchBacaan(extNopel);
+            if (tableBacaanList.size() > 0) {
+                for (TableBacaan tableBacaan : tableBacaanList) {
+                    strCatatan = tableBacaan.getCatatan();
+                    strKeterangan = tableBacaan.getKeterangan();
+                }
+                edtBacaStandCatatan.setText(strCatatan);
+                edtBacaStandKeterangan.setText(strKeterangan);
+            }
+
             if (extStand != null && !extStand.equals("")) {
                 edtBacaStandStand.setText(extStand.replaceAll("[^0-9.]", ""));
             }
@@ -315,8 +325,6 @@ public class BacaStand extends AppCompatActivity {
                 init_petugas = tablePetugas.getInisial();
                 hari_baca = tablePetugas.getHaribaca();
             }
-
-            //Log.e("FULLDATE", datetime_full);
 
             String tahun, bulan, tanggal, jam, menit, detik;
             if (datetime_full.equals("")){
@@ -397,6 +405,11 @@ public class BacaStand extends AppCompatActivity {
                 String str = new String(bytes, StandardCharsets.UTF_8);
 
                 if (str.equals("ok")){
+                    // update status ke table pelanggan
+                    databaseHandler.updatePelanggan("2", extNopel);
+//                    List<TablePelanggan> tablePelangganList = databaseHandler.searchPelanggan("nopel", extNopel);
+//                    Log.e("DIBACA", tablePelangganList.get(0).getNopel() + " " + tablePelangganList.get(0).getDibaca());
+
                     // kasih popup kalo udah selesai, atau bikin delay lalu next action di Snackbar nya
                     new Functions(getApplicationContext()).showMessage(findViewById(R.id.rootBacaStand), "Data berhasil disimpan dan diupload ke server!", "", 3000);
                     new android.os.Handler().postDelayed(
@@ -496,7 +509,7 @@ public class BacaStand extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "upload");
+                params.put("action", "uploadx");
                 params.put("init", Initial);
                 params.put("readday", Haribaca);
                 params.put("custid", Nopel);

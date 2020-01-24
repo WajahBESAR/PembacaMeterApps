@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -100,7 +101,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 new Functions(getApplicationContext()).Getar();
 
-                EditText edtLogin = findViewById(R.id.edtLogin);
+                final EditText edtLogin = findViewById(R.id.edtLogin);
 
                 if (edtLogin.getText().length() == 3) {
                     String connStat = txtConnected.getText().toString();
@@ -122,7 +123,7 @@ public class Login extends AppCompatActivity {
 
                         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                             @Override
-                            public void onResponse(String response) {
+                            public void onResponse(final String response) {
                                 Log.i("LOGIN", response);
 
                                 if(response.length() > 3){

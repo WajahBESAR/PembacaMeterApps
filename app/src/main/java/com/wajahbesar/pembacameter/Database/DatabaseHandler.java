@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.appcompat.widget.FitWindowsViewGroup;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +67,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Query create table catatan
     private static final String CREATE_TABLE_CATATAN = "CREATE TABLE IF NOT EXISTS " + TABLE_CATATAN + " (" + FIELD_CATATAN_KODE + " TEXT, " + FIELD_CATATAN_KETERANGAN + " TEXT);";
 
+    // Deklarasi table update
+    private static final String TABLE_UPDATE = "t_update";
+    private static final String FIELD_UPDATE_NOPEL = "f_update_nopel";
+    private static final String FIELD_UPDATE_TYPE = "f_update_type";
+    private static final String FIELD_UPDATE_VALUE = "f_update_value";
+    private static final String FIELD_UPDATE_STATUS = "f_update_status";
+    // Query create table update
+    private static final String CREATE_TABLE_UPDATE = "CREATE TABLE IF NOT EXISTS " + TABLE_UPDATE + "(" + FIELD_UPDATE_NOPEL + " TEXT, " + FIELD_UPDATE_TYPE + " TEXT, "
+            + FIELD_UPDATE_VALUE + " TEXT, " + FIELD_UPDATE_STATUS + " TEXT);";
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -85,8 +93,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database.execSQL(CREATE_TABLE_BACAAN);
         // Create table catatan
         database.execSQL(CREATE_TABLE_CATATAN);
+        // Create table update
+        database.execSQL(CREATE_TABLE_UPDATE);
 
-        Log.i("TABLE", "onCREATE");
+//        Log.i("TABLE", "onCREATE");
     }
 
     @Override
@@ -101,6 +111,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_BACAAN);
         // Drop table catatan
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_CATATAN);
+        // Drop table update
+        database.execSQL("DROP TABLE IF EXISTS " + TABLE_UPDATE);
 
         // Execute Drop
         onCreate(database);
@@ -157,41 +169,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database.insert(TABLE_PETUGAS, null, contentValues);
         database.close();
     }
-
-    // Cari petugas (inisial) -> BELUM KEPAKE
-//    public TablePetugas searchPetugas(String inisial) {
-//        SQLiteDatabase database = this.getReadableDatabase();
-//        Cursor cursor = database.query(
-//                TABLE_PETUGAS,
-//                new String[]{FIELD_PETUGAS_ID, FIELD_PETUGAS_INISIAL, FIELD_PETUGAS_NAMA, FIELD_PETUGAS_HARIBACA, FIELD_PETUGAS_AVATAR, FIELD_PETUGAS_LOGINID},
-//                FIELD_PETUGAS_INISIAL + "=?",
-//                new String[]{String.valueOf(inisial)},
-//                null,
-//                null,
-//                null
-//        );
-//
-//        if(cursor != null){
-//            cursor.moveToFirst();
-//        }
-//
-//        return new TablePetugas(Integer.parseInt(Objects.requireNonNull(cursor).getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
-//    }
-
-//    public String getInitial() {
-//        String strResult = "";
-//        SQLiteDatabase database = this.getReadableDatabase();
-//        Cursor cursor = database.rawQuery("SELECT " + FIELD_PETUGAS_INISIAL + " FROM " + TABLE_PETUGAS, null, null);
-//        if(cursor != null){
-//            cursor.moveToFirst();
-//            strResult = cursor.getString(0);
-//        }
-//        if(cursor != null){
-//            cursor.close();
-//        }
-//
-//        return strResult;
-//    }
 
     // List petugas
     public List<TablePetugas> selectPetugas(){
@@ -295,7 +272,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Search pelanggan
     public List<TablePelanggan> searchPelanggan(String field, String data) {
-        String fieldName = (field.equals("nopel")) ? FIELD_PELANGGAN_NOPEL : FIELD_PELANGGAN_METNUM;
+        String fieldName; // = (field.equals("nopel")) ? FIELD_PELANGGAN_NOPEL : FIELD_PELANGGAN_METNUM;
+        if (field.equals("nopel")) {
+            fieldName = FIELD_PELANGGAN_NOPEL;
+        } else if (field.equals("dibaca")) {
+            fieldName = FIELD_PELANGGAN_DIBACA;
+        } else {
+            fieldName = FIELD_PELANGGAN_METNUM;
+        }
 
         List<TablePelanggan> tablePelangganList = new ArrayList<>();
 
@@ -359,6 +343,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return count;
     }
 
+    // Select Bacaan
+    public List<TableBacaan> selectBacaan() {
+        List<TableBacaan> tableBacaanList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_BACAAN;
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                TableBacaan bacaan = new TableBacaan();
+                bacaan.setNopel(cursor.getString(0));
+                bacaan.setStand(cursor.getString(1));
+                bacaan.setCatatan(cursor.getString(2));
+                bacaan.setKeterangan(cursor.getString(3));
+                bacaan.setKeterangan(cursor.getString(4));
+                tableBacaanList.add(bacaan);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return tableBacaanList;
+    }
+
     // Add bacaan
     public void addBacaan(TableBacaan tableBacaan) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -378,6 +386,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL("DELETE FROM " + TABLE_BACAAN);
         database.close();
+    }
+
+    // Search Bacaan
+    public List<TableBacaan> searchBacaan(String nopel) {
+        List<TableBacaan> tableBacaanList = new ArrayList<>();
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TABLE_BACAAN + " WHERE " + FIELD_BACAAN_NOPEL + "=?", new String[]{nopel});
+
+        if (cursor.moveToFirst()) {
+            do {
+                TableBacaan bacaan = new TableBacaan();
+                bacaan.setNopel(cursor.getString(0));
+                bacaan.setStand(cursor.getString(1));
+                bacaan.setCatatan(cursor.getString(2));
+                bacaan.setKeterangan(cursor.getString(3));
+                bacaan.setTanggal(cursor.getString(4));
+                tableBacaanList.add(bacaan);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return tableBacaanList;
     }
 
     // Add catatan
@@ -417,5 +448,60 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
 
         return tableCatatanList;
+    }
+
+    // Add Update
+    public void addUpdate(TableUpdate tableUpdate) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FIELD_UPDATE_NOPEL, tableUpdate.getNopel());
+        contentValues.put(FIELD_UPDATE_TYPE, tableUpdate.getType());
+        contentValues.put(FIELD_UPDATE_VALUE, tableUpdate.getValue());
+        contentValues.put(FIELD_UPDATE_STATUS, tableUpdate.getStatus());
+
+        database.insert(TABLE_UPDATE, null, contentValues);
+        database.close();
+    }
+
+    // Empty Update
+    public void emptyUpdate() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM " + TABLE_UPDATE);
+        database.close();
+    }
+
+    // Select Update
+    public List<TableUpdate> selectUpdate() {
+        List<TableUpdate> tableUpdateList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_UPDATE;
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do{
+                TableUpdate update = new TableUpdate();
+                update.setNopel(cursor.getString(0));
+                update.setType(cursor.getString(1));
+                update.setValue(cursor.getString(2));
+                update.setStatus(cursor.getString(3));
+                tableUpdateList.add(update);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return tableUpdateList;
+    }
+
+    // Update Update
+    public void updateUpdate(String nopel, String type, String status) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FIELD_UPDATE_STATUS, status);
+
+        database.update(TABLE_UPDATE, contentValues, FIELD_UPDATE_NOPEL + "=? AND " + FIELD_UPDATE_TYPE + "=?", new String[]{nopel, type});
+
+        database.close();
     }
 }
